@@ -1,7 +1,24 @@
+// src/main.ts
 import { createApp } from 'vue'
-import './style.css'
+import { createPinia } from 'pinia'
+import router from './router'
 import App from './App.vue'
-import "./assets/main.css"; // <- aquí tailwind
 
+// Estilos
+import './assets/main.css'
 
-createApp(App).mount('#app')
+// Crear la aplicación
+const app = createApp(App)
+
+// Configurar Pinia (store)
+const pinia = createPinia()
+app.use(pinia)
+
+// Configurar Router
+app.use(router)
+
+// Configuraciones globales
+app.config.globalProperties.$env = import.meta.env
+
+// Montar la aplicación
+app.mount('#app')
